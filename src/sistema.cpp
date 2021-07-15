@@ -1,4 +1,5 @@
 #include "sistema.h"
+#include "usuario.h"
 #include <iostream>
 #include <sstream>
 #include <algorithm>
@@ -11,7 +12,37 @@ string Sistema::quit() {
 }
 
 string Sistema::create_user (const string email, const string senha, const string nome) {
-  return "create_user NÃO IMPLEMENTADO";
+  Usuario usuario;
+
+  if(usuarios.size() > 0)
+  {
+    bool existe = false;
+    for(auto i : usuarios) 
+    {
+      // Verificar se o email já existe.
+      if(i.get_email().compare(email) == 0)
+      {
+        existe = true;
+      }
+    }
+    
+    if(existe)
+      return "Usuário já existe!";
+
+    usuario.set_id(usuarios.size()+1);
+  }
+  if (usuarios.size() == 0)
+  {
+    usuario.set_id(1);
+  }
+
+  usuario.set_email(email);
+  usuario.set_senha(senha);
+  usuario.set_nome(nome);
+
+  usuarios.push_back(usuario);
+
+  return "Usuário criado";
 }
 
 string Sistema::login(const string email, const string senha) {
