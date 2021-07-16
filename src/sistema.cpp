@@ -55,17 +55,25 @@ string Sistema::login(const string email, const string senha) {
           usuariosLogados.insert({user.get_id(),{"",""}});
           std::cout << "Logado como " << user.get_email(); 
           return "";
-      }else{
-        return "senha ou usuário inválido!";
       }
     }
+    return "senha ou usuário inválido!";
   }else{
     return "Não existe nenhum usuário conectavél";
   }
 }
 
 string Sistema::disconnect(int id) {
-  return "disconnect NÃO IMPLEMENTADO";
+  std::map< int, std::pair<std::string, std::string> >::iterator desconectar;
+  for(auto user : usuariosLogados){
+    if(user.first==id){
+      desconectar = usuariosLogados.find(id);
+      usuariosLogados.erase(desconectar);
+      std::cout << "Desconectando usuário " << usuarios[id-1].get_email(); 
+      return "";
+    }
+  }
+  return "Não está conectado";
 }
 
 string Sistema::create_server(int id, const string nome) {
