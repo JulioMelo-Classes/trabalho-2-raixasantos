@@ -44,9 +44,24 @@ string Sistema::create_user (const string email, const string senha, const strin
 
   return "Usuário criado";
 }
-
+//Verificação da existencia de um usuario e sua coneção
 string Sistema::login(const string email, const string senha) {
-  return "login NÃO IMPLEMENTADO";
+  //Verificação se existe usuario para se conectar
+  if(usuarios.size()>0){
+    //Verificação se o email ou a senha pode se conectar
+    for(auto user : usuarios){
+      if(user.get_email().compare(email)==0 && 
+        user.get_senha().compare(senha)==0){
+          usuariosLogados.insert({user.get_id(),{"",""}});
+          std::cout << "Logado como " << user.get_email(); 
+          return "";
+      }else{
+        return "senha ou usuário inválido!";
+      }
+    }
+  }else{
+    return "Não existe nenhum usuário conectavél";
+  }
 }
 
 string Sistema::disconnect(int id) {
