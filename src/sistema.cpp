@@ -44,32 +44,39 @@ string Sistema::create_user (const string email, const string senha, const strin
 
   return "Usuário criado";
 }
-//Verificação da existencia de um usuario e sua coneção
+
 string Sistema::login(const string email, const string senha) {
   //Verificação se existe usuario para se conectar
-  if(usuarios.size()>0){
+  if(usuarios.size() > 0)
+  {
     //Verificação se o email ou a senha pode se conectar
-    for(auto user : usuarios){
-      if(user.get_email().compare(email)==0 && 
-        user.get_senha().compare(senha)==0){
+    for(auto user : usuarios)
+    {
+      if(user.get_email().compare(email) == 0 && 
+        user.get_senha().compare(senha) == 0)
+      {
           usuariosLogados.insert({user.get_id(),{"",""}});
-          std::cout << "Logado como " << user.get_email(); 
+          cout << "Logado como " << user.get_email(); 
           return "";
       }
     }
-    return "senha ou usuário inválido!";
-  }else{
-    return "Não existe nenhum usuário conectavél";
+    return "Senha ou usuário inválido!";
+  }else
+  {
+    return "Não existe nenhum usuário conectável";
   }
 }
 
 string Sistema::disconnect(int id) {
   std::map< int, std::pair<std::string, std::string> >::iterator desconectar;
-  for(auto user : usuariosLogados){
-    if(user.first==id){
+  
+  for(auto user : usuariosLogados)
+  {
+    if(user.first == id)
+    {
       desconectar = usuariosLogados.find(id);
       usuariosLogados.erase(desconectar);
-      std::cout << "Desconectando usuário " << usuarios[id-1].get_email(); 
+      cout << "Desconectando usuário " << usuarios[id-1].get_email(); 
       return "";
     }
   }
@@ -77,11 +84,47 @@ string Sistema::disconnect(int id) {
 }
 
 string Sistema::create_server(int id, const string nome) {
-  return "create_server NÃO IMPLEMENTADO";
+  Servidor servidor;
+
+  for(auto serv : servidores) 
+  {
+    // Verificar se o nome já existe.
+    if(serv.get_nome().compare(nome) == 0)
+    {
+      return "Servidor com esse nome já existe";
+    }
+  }
+
+  servidor.set_nome(nome);
+  servidor.set_usuarioDonoId(id);
+
+  servidores.push_back(servidor);   
+
+  return "Servidor criado";
 }
 
 string Sistema::set_server_desc(int id, const string nome, const string descricao) {
-  return "set_server_desc NÃO IMPLEMENTADO";
+  for(auto serv : servidores) 
+  {
+    // Verificar se existe o servidor
+    if(serv.get_nome().compare(nome) == 0)
+    {
+      // Verificar se id é autorizado a modificar
+      if(serv.get_usuarioDonoId() == id)
+      {
+        serv.set_descricao(descricao);
+        cout << "Descrição do servidor '" << nome << "' modificada!";
+        return "";
+      }
+      else
+      {
+        return "Você não pode alterar a descrição de um servidor que não foi criado por você.";
+      }
+    }
+  }
+  
+  cout << "Servidor '" << nome << "' não existe";
+  return "";
 }
 
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
