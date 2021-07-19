@@ -6,6 +6,12 @@
 using namespace std;
 
 class Usuario{
+	private:
+		int id; //<! Identificador do usuário.
+		string nome; //<! Nome do usuário.
+		string email; //<! Email do usuário.
+		string senha; //<! Senha do usuário.
+
 	public:
 		/*! Altera o identificador do usuário.
 			@param id_ O identificador.
@@ -42,12 +48,6 @@ class Usuario{
 		/*! Recupera a senha do usuário.
 			@return A senha. */
 		string get_senha() const;
-
-	private:
-		int id; //<! Identificador do usuário.
-		string nome; //<! Nome do usuário.
-		string email; //<! Email do usuário.
-		string senha; //<! Senha do usuário.
 };
 
 #endif
