@@ -46,7 +46,7 @@ string Sistema::create_user (const string email, const string senha, const strin
 }
 
 string Sistema::login(const string email, const string senha) {
-  //Verificação se existe usuario para se conectar
+  //Verificação se existe usuário para se conectar
   if(usuarios.size() > 0)
   {
     //Verificação se o email ou a senha pode se conectar
@@ -68,10 +68,11 @@ string Sistema::login(const string email, const string senha) {
 }
 
 string Sistema::disconnect(int id) {
-  std::map< int, std::pair<std::string, std::string> >::iterator desconectar;
+  std::map<int, std::pair<std::string, std::string>>::iterator desconectar;
   
   for(auto user : usuariosLogados)
   {
+    // Verificar se é o usuário que deseja desconectar
     if(user.first == id)
     {
       desconectar = usuariosLogados.find(id);
@@ -80,6 +81,7 @@ string Sistema::disconnect(int id) {
       return "";
     }
   }
+
   return "Não está conectado";
 }
 
@@ -88,7 +90,7 @@ string Sistema::create_server(int id, const string nome) {
 
   for(auto serv : servidores) 
   {
-    // Verificar se o nome já existe.
+    // Verificar se o nome já existe
     if(serv.get_nome().compare(nome) == 0)
     {
       return "Servidor com esse nome já existe";
@@ -136,12 +138,15 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
       // Verificar se id é autorizado a modificar
       if(serv.get_usuarioDonoId() == id)
       {
-        if(codigo.compare("")==0){
+        if(codigo.compare("") == 0)
+        {
           serv.set_codigoConvite("");
-          std::cout << "Código de convite do servidor '"<< nome <<"' removido!"; 
-        }else{
+          cout << "Código de convite do servidor '"<< nome <<"' removido!"; 
+        }
+        else
+        {
           serv.set_codigoConvite(codigo);
-          std::cout << "Código de convite do servidor '"<< nome <<"' modificado!";
+          cout << "Código de convite do servidor '"<< nome <<"' modificado!";
         }
         return "";
       }
@@ -151,13 +156,18 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
       }
     }
   }
+
   cout << "Servidor '" << nome << "' não existe";
   return "";
 }
 
 string Sistema::list_servers(int id) {
-  for(auto serv : servidores){
-    std::cout << serv.get_nome() << std::endl;
+  for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
+  { 
+    cout << (*serv).get_nome();
+    // Verificar se é diferente de o último servidor do vetor
+    if(serv != servidores.end()-1)
+      cout << endl;
   }
   return "";
 }
