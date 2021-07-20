@@ -128,11 +128,38 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
 }
 
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
-  return "set_server_invite_code NÃO IMPLEMENTADO";
+  for(auto serv : servidores) 
+  {
+    // Verificar se existe o servidor
+    if(serv.get_nome().compare(nome) == 0)
+    {
+      // Verificar se id é autorizado a modificar
+      if(serv.get_usuarioDonoId() == id)
+      {
+        if(codigo.compare("")==0){
+          serv.set_codigoConvite("");
+          std::cout << "Código de convite do servidor '"<< nome <<"' removido!"; 
+        }else{
+          serv.set_codigoConvite(codigo);
+          std::cout << "Código de convite do servidor '"<< nome <<"' modificado!";
+        }
+        return "";
+      }
+      else
+      {
+        return "Você não pode alterar o código de convite de um servidor que não foi criado por você.";
+      }
+    }
+  }
+  cout << "Servidor '" << nome << "' não existe";
+  return "";
 }
 
 string Sistema::list_servers(int id) {
-  return "list_servers NÃO IMPLEMENTADO";
+  for(auto serv : servidores){
+    std::cout << serv.get_nome() << std::endl;
+  }
+  return "";
 }
 
 string Sistema::remove_server(int id, const string nome) {
