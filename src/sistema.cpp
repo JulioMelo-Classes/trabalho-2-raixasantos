@@ -173,7 +173,17 @@ string Sistema::list_servers(int id) {
 }
 
 string Sistema::remove_server(int id, const string nome) {
-  return "remove_server NÃO IMPLEMENTADO";
+  for(auto serv=servidores.begin(); serv!=servidores.end(); serv++){
+    if(((*serv).get_nome()).compare(nome)==0){
+      if(((*serv).get_usuarioDonoId())==id){
+        std::cout << "Server a ser apagado "<< ((*serv).get_nome());
+        //servidores.erase(serv);
+      }else{
+        std::cout << "Usuário não possui permissão para remover o server!";
+      }
+    }
+  }
+  return "";
 }
 
 string Sistema::enter_server(int id, const string nome, const string codigo) {
