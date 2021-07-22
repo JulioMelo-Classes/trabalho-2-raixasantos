@@ -19,7 +19,7 @@ string Sistema::create_user (const string email, const string senha, const strin
     bool existe = false;
     for(auto i : usuarios) 
     {
-      // Verificar se o email já existe.
+      // Verificar se o email já existe
       if(i.get_email().compare(email) == 0)
       {
         existe = true;
@@ -61,7 +61,8 @@ string Sistema::login(const string email, const string senha) {
       }
     }
     return "Senha ou usuário inválido!";
-  }else
+  }
+  else
   {
     return "Não existe nenhum usuário conectável";
   }
@@ -87,6 +88,18 @@ string Sistema::disconnect(int id) {
 
 string Sistema::create_server(int id, const string nome) {
   Servidor servidor;
+
+  // Verificar id
+  bool existe = false;
+  for(auto usuario : usuarios)
+  {
+    if(id == usuario.get_id())
+      existe = true;
+  }
+  if (!existe)
+  {
+    return "Usuário não existe";
+  }
 
   for(auto serv : servidores) 
   {
@@ -141,12 +154,12 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
         if(codigo.compare("") == 0)
         {
           serv.set_codigoConvite("");
-          cout << "Código de convite do servidor '"<< nome <<"' removido!"; 
+          cout << "Código de convite do servidor '" << nome << "' removido!"; 
         }
         else
         {
           serv.set_codigoConvite(codigo);
-          cout << "Código de convite do servidor '"<< nome <<"' modificado!";
+          cout << "Código de convite do servidor '" << nome << "' modificado!";
         }
         return "";
       }
@@ -165,7 +178,7 @@ string Sistema::list_servers(int id) {
   for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
   { 
     cout << (*serv).get_nome();
-    // Verificar se é diferente de o último servidor do vetor
+    // Verificar se é diferente do último servidor do vetor
     if(serv != servidores.end()-1)
       cout << endl;
   }
@@ -173,26 +186,34 @@ string Sistema::list_servers(int id) {
 }
 
 string Sistema::remove_server(int id, const string nome) {
-  /*std::vector<Servidor>::iterator apagar = servidores.begin();
-  servidores.erase(apagar);*/
-  for(std::vector<Servidor>::iterator serv=servidores.begin(); serv!=servidores.end(); serv++){
-    if(((*serv).get_nome()).compare(nome)==0){
-      if(((*serv).get_usuarioDonoId())==id){
-        for(auto users : usuariosLogados){
-          if(users.second.first.compare(((*serv).get_nome()))==0){
+  for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
+  {
+    if(((*serv).get_nome()).compare(nome) == 0)
+    {
+      if(((*serv).get_usuarioDonoId()) == id)
+      {
+        for(auto users : usuariosLogados)
+        {
+          if(users.second.first.compare(((*serv).get_nome())) == 0)
+          {
             users.second.first = "";
+            users.second.second = "";
           }
         }
-        std::cout << "Servidor '"<< ((*serv).get_nome()) << "' removido";
+
         servidores.erase(serv);
-        break;
-      }else{
-        std::cout << "Você não é dono do servidro '" << ((*serv).get_nome()) << "'";
+        cout << "Servidor '" << nome << "' removido";
+        return "";
       }
-      return "";
+      else
+      {
+        cout << "Você não é dono do servidor '" << (*serv).get_nome() << "'";
+        return "";
+      }
     }
   }
-  std::cout<<"Servidor '" << nome << "' não encontrado";
+  
+  cout << "Servidor '" << nome << "' não encontrado";
   return "";
 }
 
