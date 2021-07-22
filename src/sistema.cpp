@@ -178,7 +178,11 @@ string Sistema::remove_server(int id, const string nome) {
   for(std::vector<Servidor>::iterator serv=servidores.begin(); serv!=servidores.end(); serv++){
     if(((*serv).get_nome()).compare(nome)==0){
       if(((*serv).get_usuarioDonoId())==id){
-        
+        for(auto users : usuariosLogados){
+          if(users.second.first.compare(((*serv).get_nome()))==0){
+            users.second.first = "";
+          }
+        }
         std::cout << "Servidor '"<< ((*serv).get_nome()) << "' removido";
         servidores.erase(serv);
         break;
