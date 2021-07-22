@@ -173,16 +173,22 @@ string Sistema::list_servers(int id) {
 }
 
 string Sistema::remove_server(int id, const string nome) {
-  for(auto serv=servidores.begin(); serv!=servidores.end(); serv++){
+  /*std::vector<Servidor>::iterator apagar = servidores.begin();
+  servidores.erase(apagar);*/
+  for(std::vector<Servidor>::iterator serv=servidores.begin(); serv!=servidores.end(); serv++){
     if(((*serv).get_nome()).compare(nome)==0){
       if(((*serv).get_usuarioDonoId())==id){
-        std::cout << "Server a ser apagado "<< ((*serv).get_nome());
-        //servidores.erase(serv);
+        
+        std::cout << "Servidor '"<< ((*serv).get_nome()) << "' removido";
+        servidores.erase(serv);
+        break;
       }else{
-        std::cout << "Usuário não possui permissão para remover o server!";
+        std::cout << "Você não é dono do servidro '" << ((*serv).get_nome()) << "'";
       }
+      return "";
     }
   }
+  std::cout<<"Servidor '" << nome << "' não encontrado";
   return "";
 }
 
