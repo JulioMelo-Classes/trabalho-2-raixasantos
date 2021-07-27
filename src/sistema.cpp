@@ -20,7 +20,7 @@ string Sistema::create_user (const string email, const string senha, const strin
     for(auto i : usuarios) 
     {
       // Verificar se o email já existe
-      if(i.get_email().compare(email) == 0)
+      if(i.get_email() == email)
       {
         existe = true;
       }
@@ -52,8 +52,7 @@ string Sistema::login(const string email, const string senha) {
     //Verificação se o email ou a senha pode se conectar
     for(auto user : usuarios)
     {
-      if(user.get_email().compare(email) == 0 && 
-        user.get_senha().compare(senha) == 0)
+      if(user.get_email() == email && user.get_senha() == senha)
       {
           usuariosLogados.insert({user.get_id(),{"",""}});
           cout << "Logado como " << user.get_email(); 
@@ -104,7 +103,7 @@ string Sistema::create_server(int id, const string nome) {
   for(auto serv : servidores) 
   {
     // Verificar se o nome já existe
-    if(serv.get_nome().compare(nome) == 0)
+    if(serv.get_nome() == nome)
     {
       return "Servidor com esse nome já existe";
     }
@@ -122,7 +121,7 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
   for(auto serv : servidores) 
   {
     // Verificar se existe o servidor
-    if(serv.get_nome().compare(nome) == 0)
+    if(serv.get_nome() == nome)
     {
       // Verificar se id é autorizado a modificar
       if(serv.get_usuarioDonoId() == id)
@@ -146,12 +145,12 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
   for(auto serv : servidores) 
   {
     // Verificar se existe o servidor
-    if(serv.get_nome().compare(nome) == 0)
+    if(serv.get_nome() == nome)
     {
       // Verificar se id é autorizado a modificar
       if(serv.get_usuarioDonoId() == id)
       {
-        if(codigo.compare("") == 0)
+        if(codigo == (""))
         {
           serv.set_codigoConvite("");
           cout << "Código de convite do servidor '" << nome << "' removido!"; 
@@ -177,7 +176,7 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 string Sistema::list_servers(int id) {
   for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
   { 
-    cout << (*serv).get_nome();
+    cout << serv->get_nome();
     // Verificar se é diferente do último servidor do vetor
     if(serv != servidores.end()-1)
       cout << endl;
@@ -188,13 +187,13 @@ string Sistema::list_servers(int id) {
 string Sistema::remove_server(int id, const string nome) {
   for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
   {
-    if(((*serv).get_nome()).compare(nome) == 0)
+    if(serv->get_nome() == nome)
     {
-      if(((*serv).get_usuarioDonoId()) == id)
+      if(serv->get_usuarioDonoId() == id)
       {
         for(auto users : usuariosLogados)
         {
-          if(users.second.first.compare(((*serv).get_nome())) == 0)
+          if(users.second.first == serv->get_nome())
           {
             users.second.first = "";
             users.second.second = "";
@@ -207,7 +206,7 @@ string Sistema::remove_server(int id, const string nome) {
       }
       else
       {
-        cout << "Você não é dono do servidor '" << (*serv).get_nome() << "'";
+        cout << "Você não é dono do servidor '" << serv->get_nome() << "'";
         return "";
       }
     }
