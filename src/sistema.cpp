@@ -10,7 +10,9 @@ using namespace std;
 string Sistema::quit() {
   return "Saindo...";
 }
-
+/*
+A1.2 ok
+*/
 string Sistema::create_user (const string email, const string senha, const string nome) {
   Usuario usuario;
 
@@ -45,6 +47,9 @@ string Sistema::create_user (const string email, const string senha, const strin
   return "Usuário criado";
 }
 
+/*
+A1.2 ok
+*/
 string Sistema::login(const string email, const string senha) {
   //Verificação se existe usuário para se conectar
   if(usuarios.size() > 0)
@@ -68,8 +73,11 @@ string Sistema::login(const string email, const string senha) {
   }
 }
 
+/*
+A2.1 ok
+*/
 string Sistema::disconnect(int id) {
-  std::map<int, std::pair<std::string, std::string>>::iterator desconectar;
+  std::map<int, std::pair<std::string, std::string>>::iterator desconectar; //poderia usar auto lá na hora de usar
   
   for(auto user : usuariosLogados)
   {
@@ -86,10 +94,15 @@ string Sistema::disconnect(int id) {
   return "Não está conectado";
 }
 
+/*
+A2.2 70%
+- Faltou verificar se o usuário está logado
+*/
 string Sistema::create_server(int id, const string nome) {
   Servidor servidor;
 
   // Verificar id
+  // desnecessário, vc precisa apenas verificar se está logado
   bool existe = false;
   for(auto usuario : usuarios)
   {
@@ -118,6 +131,10 @@ string Sistema::create_server(int id, const string nome) {
   return "Servidor criado";
 }
 
+/*
+A2.3 70%
+Faltou verificar se está logado
+*/
 string Sistema::set_server_desc(int id, const string nome, const string descricao) {
   for(auto serv : servidores) 
   {
@@ -142,6 +159,10 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
   return "";
 }
 
+/*
+A2.4 70%
+- faltou verificar se está logado
+*/
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
   for(auto serv : servidores) 
   {
@@ -174,6 +195,10 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
   return "";
 }
 
+/*
+A2.5 ok
+- Vc não verificou se estava logado, mas como não é necessário para essa funcionalidade eu não vou remover pontos
+*/
 string Sistema::list_servers(int id) {
   for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
   { 
@@ -185,6 +210,10 @@ string Sistema::list_servers(int id) {
   return "";
 }
 
+/*
+A2.6 70%
+- Faltou verificar se o usuário está logado
+*/
 string Sistema::remove_server(int id, const string nome) {
   for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
   {

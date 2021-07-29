@@ -5,6 +5,10 @@
 
 using namespace std;
 
+/*
+CP1 classe usuário ok
+Essa classe ficaria mais simples se vc usasse um construtor e tirasse os métodos set
+*/
 class Usuario{
 	private:
 		int id; //<! Identificador do usuário.

@@ -8,6 +8,9 @@
 
 using namespace std;
 
+/*
+CP1 classe Servidor ok
+*/
 class Servidor{
 	private:
 		int usuarioDonoId; //<! Id do usuário que criou o canal.
