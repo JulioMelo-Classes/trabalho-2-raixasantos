@@ -142,23 +142,23 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
 }
 
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
-  for(auto serv : servidores) 
+  for(auto serv = servidores.begin(); serv!=servidores.end(); serv++) 
   {
     // Verificar se existe o servidor
-    if(serv.get_nome() == nome)
+    if(serv->get_nome() == nome)
     {
       // Verificar se id é autorizado a modificar
-      if(serv.get_usuarioDonoId() == id)
+      if(serv->get_usuarioDonoId() == id)
       {
         if(codigo == (""))
         {
-          serv.set_codigoConvite("");
+          serv->set_codigoConvite("");
           cout << "Código de convite do servidor '" << nome << "' removido!"; 
         }
         else
         {
-          serv.set_codigoConvite(codigo);
-          cout << "Código de convite do servidor '" << nome << "' modificado!";
+          serv->set_codigoConvite(codigo);
+          cout << "Código de convite do servidor '" << nome;
         }
         return "";
       }
@@ -217,15 +217,59 @@ string Sistema::remove_server(int id, const string nome) {
 }
 
 string Sistema::enter_server(int id, const string nome, const string codigo) {
-  return "enter_server NÃO IMPLEMENTADO";
+
+  std::map<int, std::pair<std::string, std::string>>::iterator conectar;
+
+  for(auto serv : servidores){
+    if(serv.get_nome()==nome){
+      if(codigo==""){
+        if(serv.get_codigoConvite()!=""){
+          return "Servidor requer código de convite!";
+        }else{
+          conectar = usuariosLogados.find(id);
+          conectar->second.first = serv.get_nome();
+          return "Entrou no servidor com sucesso";
+        }
+      }else{
+        if(serv.get_codigoConvite()==codigo){
+          conectar = usuariosLogados.find(id);
+          conectar->second.first = serv.get_nome();
+          return "Entrou no servidor com sucesso";
+        }else{
+          return "Código de convite incorreto";
+        }
+      }
+    }
+  }
 }
 
 string Sistema::leave_server(int id, const string nome) {
-  return "leave_server NÃO IMPLEMENTADO";
+  auto desconectar = usuariosLogados.find(id);
+  if(desconectar->second.first == nome){
+    desconectar->second.first = "";
+    return "Saindo do servidor '" + nome + "'";
+  }
+  else{
+    return "Você não está em qualquer servidor!";
+  }
 }
 
 string Sistema::list_participants(int id) {
-  return "list_participants NÃO IMPLEMENTADO";
+std::map<int, std::pair<std::string,std::string>>::iterator userServer;
+userServer = usuariosLogados.find(id);
+if(userServer->second.first == ""){
+  return "Usuário não está conectado em nenhum server";
+}
+for(auto user=usuariosLogados.begin(); user != usuariosLogados.end(); user++){
+    if(user->second.first == userServer->second.first){
+      for(auto logados : usuarios){
+        if(logados.get_id()==user->first){
+          std::cout << logados.get_nome() << std::endl;
+        }
+      }
+    }
+  }
+  return "";
 }
 
 string Sistema::list_channels(int id) {
