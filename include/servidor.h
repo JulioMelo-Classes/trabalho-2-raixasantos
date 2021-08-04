@@ -18,19 +18,16 @@ class Servidor{
 		std::vector<int> participantesId; //<! Vetor com os ids dos participantes do servidor.
 
 	public:
-		/*! Altera o identificador do usuário que criou o canal.
-			@param usuarioDonoId_ O identificador.
-			@return void */
-		void set_usuarioDonoId(int usuarioDonoId_);
+		/* Construtor */
+		Servidor(int usuarioDonoId, string nome)
+		{
+			this->usuarioDonoId = usuarioDonoId;
+			this->nome = nome;
+		}
 
 		/*! Recupera o identificador do usuário que criou o canal.
 			@return O identificador. */
 		int get_usuarioDonoId() const;
-
-		/*! Altera o nome do servidor.
-			@param nome_ O nome.
-			@return void */
-		void set_nome(string nome_);
 
 		/*! Recupera o nome do servidor.
 			@return O nome. */
@@ -53,7 +50,14 @@ class Servidor{
 		/*! Recupera o código de convite do servidor.
 			@return O código. */
 		string get_codigoConvite() const;
-		
+
+		/* Insere o id do novo participante do servidor. 
+			@param id_
+			@return void */
+		void inserir_participante(int id_);	
+
+		/* Lista os canais do servidor. */
+		void listar_canais();
 };
 
 #endif
