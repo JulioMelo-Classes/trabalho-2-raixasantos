@@ -2,19 +2,9 @@
 
 using namespace std;
 
-void Servidor::set_usuarioDonoId(int usuarioDonoId_)
-{
-    usuarioDonoId = usuarioDonoId_;
-}
-
 int Servidor::get_usuarioDonoId() const
 {
     return usuarioDonoId;
-}
-
-void Servidor::set_nome(string nome_)
-{
-    nome = nome_;
 }
 
 string Servidor::get_nome() const
@@ -40,4 +30,22 @@ void Servidor::set_codigoConvite(string codigoConvite_)
 string Servidor::get_codigoConvite() const
 {
     return codigoConvite;
+}
+
+void Servidor::inserir_participante(int id_)
+{
+    participantesId.push_back(id_);
+}
+		
+void Servidor::listar_canais()
+{
+    for(auto canal = canaisTextos.begin(); canal != canaisTextos.end(); canal++)
+    {   if(canal->get_nome() != "")
+        {
+            cout << canal->get_nome();
+            // Verificar se é diferente do último servidor do vetor
+            if(canal != canaisTextos.end()-1)
+                cout << endl;
+        }
+    }
 }
