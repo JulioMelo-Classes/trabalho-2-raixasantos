@@ -52,5 +52,9 @@ login isaacfranco@imd.ufrn.br senhalegal
 enter-server 1 servidor-sinistro
 list-participants 1
 list-channels 1
+create-channel 1 cabosse
+list-channels 1
+enter-channel 1 cabosse
+send-message 1 Oi pessoal querem TC?
 quit
 create-user naodeveprocessar@imd.ufrn.br naodevechegaraqui Não deve chegar aqui
