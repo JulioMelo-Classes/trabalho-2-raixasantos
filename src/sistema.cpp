@@ -281,19 +281,86 @@ string Sistema::list_channels(int id) {
 }
 
 string Sistema::create_channel(int id, const string nome) {
-  return "create_channel NÃO IMPLEMENTADO";
+  auto usuario = usuariosLogados.find(id);
+
+  if(usuario == usuariosLogados.end())
+    return "Não está conectado";
+
+  if(usuario->second.first == "")
+    return "Usuário não está conectado em nenhum servidor";
+
+  string nomeServ = usuario->second.first;
+
+  auto servidor = find_if(servidores.begin(), servidores.end(), [nomeServ](Servidor servidor){
+                            return servidor.get_nome() == nomeServ; });
+
+  if(servidor != servidores.end())
+  {
+    if(servidor->criar_canal(nome))
+      return "Canal de texto ‘" + nome + "’ criado!";
+  }
+
+  return "Canal de texto ‘" + nome + "’ já existe!";
 }
 
 string Sistema::enter_channel(int id, const string nome) {
-  return "enter_channel NÃO IMPLEMENTADO";
+  auto usuario = usuariosLogados.find(id);
+
+  if(usuario == usuariosLogados.end())
+    return "Não está conectado";
+
+  if(usuario->second.first == "")
+    return "Usuário não está conectado em nenhum servidor";
+  
+  string nomeServ = usuario->second.first;
+
+  auto servidor = find_if(servidores.begin(), servidores.end(), [nomeServ](Servidor servidor){
+                            return servidor.get_nome() == nomeServ; });
+
+  if(servidor != servidores.end())
+  {
+    if(servidor->verificar_canal(nome))
+    {
+      usuario->second.second = nome;
+      return "Entrou no canal '" + nome + "’!";
+    }
+    else
+      return "Canal ‘" + nome + "’ não existe";
+  }
+
+  return "";
 }
 
 string Sistema::leave_channel(int id) {
-  return "leave_channel NÃO IMPLEMENTADO";
+  auto usuario = usuariosLogados.find(id);
+
+  if(usuario == usuariosLogados.end())
+    return "Não está conectado";
+
+  if(usuario->second.first == "")
+    return "Usuário não está conectado em nenhum servidor";
+  
+  usuario->second.second = "";
+    return "Saindo do canal...";
 }
 
 string Sistema::send_message(int id, const string mensagem) {
-  return "send_message NÃO IMPLEMENTADO";
+  auto usuario = usuariosLogados.find(id);
+
+  if(usuario == usuariosLogados.end())
+    return "Não está conectado";
+
+  if(usuario->second.first == "")
+    return "Usuário não está conectado em nenhum servidor";
+  
+  string nomeServ = usuario->second.first,
+          nomeCanal = usuario->second.second;
+
+
+  auto servidor = find_if(servidores.begin(), servidores.end(), [nomeServ](Servidor servidor){
+                            return servidor.get_nome() == nomeServ; });
+  servidor->salvar_mensagem(id, mensagem, nomeCanal);
+  return "";
 }
 
 string Sistema::list_messages(int id) {

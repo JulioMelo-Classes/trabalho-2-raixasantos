@@ -2,12 +2,12 @@
 
 using namespace std;
 
-void CanalTexto::set_nome(string nome_)
-{
-    nome = nome_;
-}
-
 string CanalTexto::get_nome() const
 {
     return nome;
+}
+
+void CanalTexto::inserir_mensagem(Mensagem & mensagem)
+{
+    mensagens.push_back(mensagem);
 }
