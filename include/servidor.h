@@ -1,6 +1,7 @@
 #ifndef SERVIDOR_H
 #define SERVIDOR_H
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <vector>
 
@@ -54,10 +55,21 @@ class Servidor{
 		/* Insere o id do novo participante do servidor. 
 			@param id_
 			@return void */
-		void inserir_participante(int id_);	
+		void inserir_participante(int id);	
+
+		/* Verifica a existencia de um canal. */
+		bool verificar_canal(string nome_);
+		
+		/* Cria um canal de texto. 
+			@param nome_
+			@return void */
+		bool criar_canal(string nome_);
 
 		/* Lista os canais do servidor. */
 		void listar_canais();
+
+		/* Armazena a mensagem enviada. */
+		void salvar_mensagem(int id, string mensagem, string canal);
 };
 
 #endif

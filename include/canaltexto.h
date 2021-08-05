@@ -16,11 +16,17 @@ class CanalTexto{
 		/*! Altera o nome do canal.
 			@param nome_ O nome.
 			@return void */
-		void set_nome(string nome_);
+		CanalTexto(string nome)
+		{
+			this->nome = nome;
+		}
 
 		/*! Recupera o nome do canal.
 			@return O nome. */
 		string get_nome() const;
+
+		/* Insere a mensagem do canal. */
+		void inserir_mensagem(Mensagem & mensagem);
 };
 
 #endif
