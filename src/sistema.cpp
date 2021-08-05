@@ -186,6 +186,9 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
   if(conectar == usuariosLogados.end())
     return "Não está conectado";
 
+  if(conectar->second.first == nome)
+    return "Você já está nesse servidor!";
+
   for(auto serv = servidores.begin(); serv != servidores.end(); serv++)
   {
     if(serv->get_nome() == nome)
@@ -243,20 +246,12 @@ string Sistema::list_participants(int id) {
   if(userServer->second.first == "")
     return "Usuário não está conectado em nenhum servidor";
 
-  for(auto user = usuariosLogados.begin(); user != usuariosLogados.end(); user++)
-  {
-      if(user->second.first == userServer->second.first)
-      {
-        for(auto logados = usuarios.begin(); logados != usuarios.end(); logados++)
-        { // ajustar
-          if(logados->get_id() == user->first){
-            cout << logados->get_nome();
-            if(logados != usuarios.end()-1)
-              cout << endl;
-          }
-        }
-      }
-    }
+  string nomeServ = userServer->second.first;
+
+  auto servidor = find_if(servidores.begin(), servidores.end(), [nomeServ](Servidor servidor){
+                            return servidor.get_nome() == nomeServ; });
+
+  servidor->listar_participantes(usuarios);
 
   return "";
 }
@@ -359,15 +354,27 @@ string Sistema::send_message(int id, const string mensagem) {
 
   auto servidor = find_if(servidores.begin(), servidores.end(), [nomeServ](Servidor servidor){
                             return servidor.get_nome() == nomeServ; });
+
   servidor->salvar_mensagem(id, mensagem, nomeCanal);
-  return "";
+  return "Mensagem enviada";
 }
 
 string Sistema::list_messages(int id) {
-  return "list_messages NÃO IMPLEMENTADO";
+  auto usuario = usuariosLogados.find(id);
+
+  if(usuario == usuariosLogados.end())
+    return "Não está conectado";
+
+  if(usuario->second.first == "")
+    return "Usuário não está conectado em nenhum servidor";
+  
+  string nomeServ = usuario->second.first,
+          nomeCanal = usuario->second.second;
+
+  auto servidor = find_if(servidores.begin(), servidores.end(), [nomeServ](Servidor servidor){
+                            return servidor.get_nome() == nomeServ; });
+
+  servidor->listar_mensagens(nomeCanal, usuarios);
+
+  return "";
 }
-
-
-
-
-/* IMPLEMENTAR MÉTODOS PARA OS COMANDOS RESTANTES */

@@ -37,6 +37,24 @@ void Servidor::inserir_participante(int id)
     participantesId.push_back(id);
 }
 
+void Servidor::listar_participantes(vector<Usuario> & usuarios)
+{
+    for(auto itr = participantesId.begin(); itr != participantesId.end(); itr++)
+    {   
+        int participante = *itr;
+        cout << participante << " ";
+        auto usuario = find_if(usuarios.begin(), usuarios.end(), [participante](Usuario user){
+                            return user.get_id() == participante; });
+
+        if(usuario != usuarios.end())
+        {
+            cout << usuario->get_nome();
+            if(usuario == usuarios.end()-1)
+                cout << endl;
+        }
+    }
+}
+
 bool Servidor::verificar_canal(string nome_)
 {
     auto canalTeste = find_if(canaisTextos.begin(), canaisTextos.end(), [nome_](CanalTexto canal){
@@ -69,14 +87,33 @@ void Servidor::listar_canais()
 }
 
 void Servidor::salvar_mensagem(int id, string conteudo, string canal)
-{
-    string dataHora;
-    Mensagem mensagem(dataHora, id, conteudo);
+{   
+    time_t dataHora;
+    struct tm * timeinfo;
+    char buffer[80];
+
+    time (&dataHora);
+    timeinfo = localtime(&dataHora);
+    strftime(buffer, 80, "<%d/%m/%Y - %H:%M>", timeinfo);
+
+    string dataFormatada(buffer);
+
+    Mensagem mensagem(dataFormatada, id, conteudo);
 
     if(verificar_canal(canal))
     {
         auto canalTeste = find_if(canaisTextos.begin(), canaisTextos.end(), [canal](CanalTexto canalSeg){
                                 return canalSeg.get_nome() == canal; });
         canalTeste->inserir_mensagem(mensagem);
+    }
+}
+
+void Servidor::listar_mensagens(string canal, vector<Usuario> & usuarios)
+{
+    if(verificar_canal(canal))
+    {
+        auto canalTeste = find_if(canaisTextos.begin(), canaisTextos.end(), [canal](CanalTexto canalSeg){
+                                return canalSeg.get_nome() == canal; });
+        canalTeste->imprimir_mensagens(usuarios);
     }
 }
