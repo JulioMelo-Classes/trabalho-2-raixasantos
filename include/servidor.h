@@ -4,7 +4,9 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <cstdlib>
 
+#include "usuario.h"
 #include "canaltexto.h"
 
 using namespace std;
@@ -57,6 +59,9 @@ class Servidor{
 			@return void */
 		void inserir_participante(int id);	
 
+		/* Listar participantes. */	
+		void listar_participantes(vector<Usuario> & usuarios);
+
 		/* Verifica a existencia de um canal. */
 		bool verificar_canal(string nome_);
 		
@@ -70,6 +75,9 @@ class Servidor{
 
 		/* Armazena a mensagem enviada. */
 		void salvar_mensagem(int id, string mensagem, string canal);
+
+		/* Lista as mensagens do canal do servidor. */
+		void listar_mensagens(string canal, vector<Usuario> & usuarios);
 };
 
 #endif

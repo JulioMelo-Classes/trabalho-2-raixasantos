@@ -3,7 +3,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
+#include "usuario.h"
 #include "mensagem.h"
 
 using namespace std;
@@ -27,6 +29,9 @@ class CanalTexto{
 
 		/* Insere a mensagem do canal. */
 		void inserir_mensagem(Mensagem & mensagem);
+
+		/* Imprimi as mensagens do canal. */
+		void imprimir_mensagens(vector<Usuario> & usuarios);
 };
 
 #endif
