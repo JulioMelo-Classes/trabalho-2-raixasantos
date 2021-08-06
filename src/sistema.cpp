@@ -53,7 +53,7 @@ string Sistema::disconnect(int id) {
   if(desconectar != usuariosLogados.end())
   {
     usuariosLogados.erase(desconectar);
-    return "Desconectando usuário " + usuarios[id].get_email();
+    return "Desconectando usuário " + usuarios[id-1].get_email();
   }
   return "Não está conectado";
 }
