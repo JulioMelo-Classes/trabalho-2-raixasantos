@@ -1,0 +1,38 @@
+create-user Danilo@gmail.com 0001 Danilo
+login Danilo@gmail.com 0001
+create-user Danilo@gmail.com 0002 Daniel de Lucas
+create-user Daniel@gmail.com 0002 Daniel de Lucas
+create-user Macota@gmail.com 0003 Macota dos Santos
+login Macota@gmail.com 0003
+create-user Dan@gmail.com 0004 Daniel Souza
+create-user Maria@gmail.com 0005 Maria D. Teste
+login Dan@gmail.com 0004
+logen Maria@gmail.com 0005
+login Maria@gmail.com 0005
+create-server 1 classe
+set-server-invite-code 1 classe 134
+enter-server 1 classe 134
+enter-server 2 classe 134
+enter-server 3 classe 134 
+enter-server 4 classe 134
+set-server-desc 3 classe "Este servidor serve para os alunos discutirem sobre as aulas"
+set-server-desc 1 classe "Este servidor serve para os alunos discutirem sobre as aulas"
+create-channel 1 LP1
+enter-channel 1 lp1
+enter-channel 1 LP1
+send-message 1 E ai pessoal, como tá indo o trabalho de LP?
+send-message 3 Fazendo os testes finais já
+enter-channel 3 LP1
+send-message 3 Fazendo os testes finais já
+enter-channel 4 LP1
+list-messages 4
+send-message 4 Já tá proximo de entregar?! lasquei;-;
+send-message 1 Não me diga que nem começou??
+send-message 4 ehhhhh...
+send-message 3 DANIEL!! eu avisei você toda semana
+send-message 1 Corra pra ver se consegue pelo menos uns pontos
+leave-channel 4
+leave-server 4 classe
+disconnect 4
+list-messages 1
+quit
