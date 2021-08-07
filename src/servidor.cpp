@@ -42,14 +42,13 @@ void Servidor::listar_participantes(vector<Usuario> & usuarios)
     for(auto itr = participantesId.begin(); itr != participantesId.end(); itr++)
     {   
         int participante = *itr;
-        cout << participante << " ";
         auto usuario = find_if(usuarios.begin(), usuarios.end(), [participante](Usuario user){
                             return user.get_id() == participante; });
 
         if(usuario != usuarios.end())
         {
             cout << usuario->get_nome();
-            if(usuario == usuarios.end()-1)
+            if(itr != participantesId.end()-1)
                 cout << endl;
         }
     }
