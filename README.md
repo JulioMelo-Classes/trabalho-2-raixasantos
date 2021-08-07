@@ -41,7 +41,7 @@ No windows:
 
 ```
 
-.\Debug\keno.exe
+.\Debug\concordo.exe
 
 ```
 
@@ -66,11 +66,12 @@ No windows:
 
 ```
 
-.\Debug\keno.exe ..\data\bet_1.dat
+.\Debug\keno.exe
 
 ```
+Depois basta copiar o conteudo do arquivo que será executado em ordem
 
   
 
 # Limitações ou funcionalidades não implementadas no programa.
-Não conseguimos identificar limitações ou funcionalidades não implementadas no programa.
+Encontrar uma forma mais prática de executar com arquivos de forma mais prática.
