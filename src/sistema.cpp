@@ -367,6 +367,9 @@ string Sistema::list_messages(int id) {
 
   if(usuario->second.first == "")
     return "Usuário não está conectado em nenhum servidor";
+
+  if(usuario->second.second == "")
+    return "Usuário não está conectado em nenhum canal";
   
   string nomeServ = usuario->second.first,
           nomeCanal = usuario->second.second;
