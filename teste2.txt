@@ -1,0 +1,37 @@
+login raissa@email.com senhateste
+create-user raissa@email.com senhateste Raissa
+login raissa@email.com senhateste
+create-user renata@email.com senhateste2 Renata
+login renat@email.com senhateste2
+login renata@email.com senhateste
+login renata@email.com senhateste2
+disconnect 0
+create-server 1 grupo-novo
+enter-server 1 grupo-novo
+list-servers 0
+remove-server 0 grupo
+remove-server 2 grupo-novo
+enter-server 2 grupo-novo
+list-participants 1
+create-channel 1 canal-velho
+create-channel 3 canal-novo
+create-channel 2 canal-novo
+enter-channel 2 canal-novo
+enter-channel 1 canal-novo
+enter-channel 1 canal-novo1
+list-channels 2
+leave-channel 1
+leave-channel 2
+enter-channel 2 canal-velho
+enter-channel 1 canal-velho
+list-messages 1
+send-message 0 Oi, vamos testar o canal?
+send-message 1 Oi, vamos testar o canal?
+send-message 2 Opa, bora!
+leave-channel 1
+leave-channel 2
+leave-server 1 grupo-novo
+leave-server 2 grupo-novo
+list-messages 0
+list-messages 1
+quit
