@@ -13,7 +13,7 @@ class Usuario{
 		string senha; //<! Senha do usuário.
 
 	public:
-		/* Construtor */
+		/*! Construtor */
 		Usuario(int id, string nome, string email, string senha)
 		{
 			this->id = id;

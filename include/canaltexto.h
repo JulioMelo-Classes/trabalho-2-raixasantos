@@ -27,10 +27,14 @@ class CanalTexto{
 			@return O nome. */
 		string get_nome() const;
 
-		/* Insere a mensagem do canal. */
+		/*! Insere a mensagem do canal. 
+			@param mensagem Um objeto mensagem.
+			@return void */
 		void inserir_mensagem(Mensagem & mensagem);
 
-		/* Imprimi as mensagens do canal. */
+		/*! Imprimi as mensagens do canal. 
+			@param usuarios Um vetor de usuários.
+			@return void */
 		void imprimir_mensagens(vector<Usuario> & usuarios);
 };
 

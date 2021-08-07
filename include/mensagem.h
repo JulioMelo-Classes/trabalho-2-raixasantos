@@ -12,7 +12,7 @@ class Mensagem{
         string conteudo; //<! Conteúdo da mensagem.
 
     public:
-		/* Construtor */
+		/*! Construtor */
 		Mensagem(string dataHora, int enviadaPor, string conteudo)
 		{
 			this->dataHora = dataHora;

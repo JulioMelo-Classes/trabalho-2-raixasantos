@@ -21,7 +21,7 @@ class Servidor{
 		std::vector<int> participantesId; //<! Vetor com os ids dos participantes do servidor.
 
 	public:
-		/* Construtor */
+		/*! Construtor */
 		Servidor(int usuarioDonoId, string nome)
 		{
 			this->usuarioDonoId = usuarioDonoId;
@@ -54,29 +54,41 @@ class Servidor{
 			@return O código. */
 		string get_codigoConvite() const;
 
-		/* Insere o id do novo participante do servidor. 
-			@param id_
+		/*! Insere o id do novo participante do servidor. 
+			@param id_ O id do participante.
 			@return void */
 		void inserir_participante(int id);	
 
-		/* Listar participantes. */	
+		/*! Lista os participantes do servidor. 
+			@param usuarios Um vetor de usuários.
+			@return void */
 		void listar_participantes(vector<Usuario> & usuarios);
 
-		/* Verifica a existencia de um canal. */
+		/*! Verifica a existencia de um canal. 
+			@param nome_ O nome do canal.
+			@return True, caso exista um canal. False, caso contrário. */
 		bool verificar_canal(string nome_);
 		
-		/* Cria um canal de texto. 
-			@param nome_
-			@return void */
+		/*! Cria um canal de texto. 
+			@param nome_ O nome do canal.
+			@return True, se a criação foi bem sucedida. False, caso contrário. */
 		bool criar_canal(string nome_);
 
-		/* Lista os canais do servidor. */
+		/*! Lista os canais do servidor. 
+			@return void */
 		void listar_canais();
 
-		/* Armazena a mensagem enviada. */
+		/*! Armazena a mensagem enviada. 
+			@param id O id do participante que enviou a mensagem.
+			@param mensagem O conteúdo da mensagem.
+			@param canal O canal de origem da mensagem.
+			@return void */
 		void salvar_mensagem(int id, string mensagem, string canal);
 
-		/* Lista as mensagens do canal do servidor. */
+		/*! Lista as mensagens do canal do servidor. 
+			@param canal O canal de origem das mensagens.
+			@param usuarios Um vetor de usuários.
+			@return void */
 		void listar_mensagens(string canal, vector<Usuario> & usuarios);
 };
 
