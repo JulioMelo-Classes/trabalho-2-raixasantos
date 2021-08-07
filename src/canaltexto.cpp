@@ -13,7 +13,9 @@ void CanalTexto::inserir_mensagem(Mensagem & mensagem)
 }
 
 void CanalTexto::imprimir_mensagens(vector<Usuario> & usuarios)
-{
+{   
+    if(mensagens.size() == 0) 
+        cout << "Sem mensagens para exibir";
     for(auto mensagem = mensagens.begin(); mensagem != mensagens.end(); mensagem++)
     {   
         int id = mensagem->get_enviadaPor();
