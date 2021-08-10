@@ -25,7 +25,7 @@ cmake --build .
 
 # Como executar o projeto?
 
-A compilação gera um executável com o nome keno dentro da pasta build, __no windows__ esse executável fica na pasta Debug. Logo após a compilação, para executar o programa gerado use os comandos:
+A compilação gera um executável com o nome concordo dentro da pasta build, __no windows__ esse executável fica na pasta Debug. Logo após a compilação, para executar o programa gerado use os comandos:
 
   
 
@@ -66,10 +66,9 @@ No windows:
 
 ```
 
-.\Debug\keno.exe
+# Basta copiar o conteúdo do arquivo que será executado em ordem
 
 ```
-Depois basta copiar o conteudo do arquivo que será executado em ordem
 
   
 
