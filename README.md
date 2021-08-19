@@ -48,6 +48,7 @@ No windows:
   
 
 ## Como executar o conjunto dos testes planejados?
+<!--como vocês não documentaram os casos de teste vou considerar 0.5-->
 
 Para executar com o arquivo de aposta ou os arquivos de teste é necessário adicionar o local do arquivo após o comando, exemplo com o teste1.txt:
 

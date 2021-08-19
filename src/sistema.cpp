@@ -181,6 +181,11 @@ string Sistema::remove_server(int id, const string nome) {
   return "Servidor '" + nome + "' não encontrado";
 }
 
+/*
+A2.7 0,6
+- Quando um usuário faz enter-server duas vezes ele acaba ficando com duas cópias de seu nome no servidor. Tirei 20% por isso.
+- Quando o dono de um servidor fechado tenta entrar nele, não deve ser requerido código. Tirei 20% por isso.
+*/
 string Sistema::enter_server(int id, const string nome, const string codigo) {
   auto conectar = usuariosLogados.find(id);
   if(conectar == usuariosLogados.end())
@@ -224,6 +229,10 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
   return "Servidor não existe!";
 }
 
+/*
+A2.8 0,8
+- ao usar leave-server o usuário ainda continua na lista de participantes do servidor! tirei 20% por isso.
+*/
 string Sistema::leave_server(int id, const string nome) {
   auto desconectar = usuariosLogados.find(id);
   if(desconectar == usuariosLogados.end())
@@ -237,6 +246,9 @@ string Sistema::leave_server(int id, const string nome) {
     return "Você não está em qualquer servidor!";
 }
 
+/*
+A2.9 ok
+*/
 string Sistema::list_participants(int id) {
   auto userServer = usuariosLogados.find(id);
   
@@ -256,6 +268,9 @@ string Sistema::list_participants(int id) {
   return "";
 }
 
+/*
+B1.1 ok
+*/
 string Sistema::list_channels(int id) { 
   auto usuario = usuariosLogados.find(id);
 
@@ -275,6 +290,9 @@ string Sistema::list_channels(int id) {
   return "";
 }
 
+/*
+B1.2 ok
+*/
 string Sistema::create_channel(int id, const string nome) {
   auto usuario = usuariosLogados.find(id);
 
@@ -292,12 +310,15 @@ string Sistema::create_channel(int id, const string nome) {
   if(servidor != servidores.end())
   {
     if(servidor->criar_canal(nome))
-      return "Canal de texto ‘" + nome + "’ criado!";
+      return "Canal de texto '" + nome + "' criado!";
   }
 
-  return "Canal de texto ‘" + nome + "’ já existe!";
+  return "Canal de texto '" + nome + "' já existe!";
 }
 
+/*
+B1.3 ok
+*/
 string Sistema::enter_channel(int id, const string nome) {
   auto usuario = usuariosLogados.find(id);
 
@@ -317,15 +338,18 @@ string Sistema::enter_channel(int id, const string nome) {
     if(servidor->verificar_canal(nome))
     {
       usuario->second.second = nome;
-      return "Entrou no canal '" + nome + "’!";
+      return "Entrou no canal '" + nome + "'!";
     }
     else
-      return "Canal ‘" + nome + "’ não existe";
+      return "Canal '" + nome + "' não existe";
   }
 
   return "";
 }
 
+/*
+B1.4 ok
+*/
 string Sistema::leave_channel(int id) {
   auto usuario = usuariosLogados.find(id);
 
@@ -339,6 +363,11 @@ string Sistema::leave_channel(int id) {
     return "Saindo do canal...";
 }
 
+/*
+B2.1 0,9
+- Quando um usuário está em um servidor mas não está em qualquer canal, esse método imprime "mensagem enviada" muito
+embora o servidor não faça qualquer coisa. Vou tirar 10% por isso.
+*/
 string Sistema::send_message(int id, const string mensagem) {
   auto usuario = usuariosLogados.find(id);
 
@@ -359,6 +388,9 @@ string Sistema::send_message(int id, const string mensagem) {
   return "Mensagem enviada";
 }
 
+/*
+B2.2 ok
+*/
 string Sistema::list_messages(int id) {
   auto usuario = usuariosLogados.find(id);
 

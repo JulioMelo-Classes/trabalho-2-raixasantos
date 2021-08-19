@@ -10,7 +10,9 @@
 #include "canaltexto.h"
 
 using namespace std;
-
+/*
+Cp2 ok
+*/
 class Servidor{
 	private:
 		int usuarioDonoId; //<! Id do usuário que criou o canal.

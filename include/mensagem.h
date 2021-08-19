@@ -5,6 +5,9 @@
 
 using namespace std;
 
+/*
+Cp2 ok
+*/
 class Mensagem{
     private:
         string dataHora; //<! Data e hora da mensagem.
